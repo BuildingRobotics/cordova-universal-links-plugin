@@ -179,9 +179,11 @@ public class UniversalLinksPlugin extends CordovaPlugin {
         // read intent
         String action = intent.getAction();
         Uri launchUri = intent.getData();
+        // clear intent
+        intent.setData("");
 
         // if app was not launched by the url - ignore
-        if (!Intent.ACTION_VIEW.equals(action) || launchUri == null) {
+        if (!Intent.ACTION_VIEW.equals(action) || launchUri == null || Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) {
             return;
         }
 
